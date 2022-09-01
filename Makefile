@@ -32,9 +32,8 @@ clone:
 		echo $(R)
 		git clone git@github.com:RaymboX/$(R).git
 
-#doesnt work
-#mouse:
-#		defaults write -g com.apple.swipescrolldirection 0
+mouse:
+		defaults write -g com.apple.swipescrolldirection 0
 
 list:
 				@echo "---- main git (will not be delete) ----"
@@ -43,11 +42,10 @@ list:
 				@$(SUB_GIT)
 				@echo "\n"
 
-#to dangerous
-#del:
-#				$(RM_SUB_GIT)
-#				@echo "remain sub git (empty = good)"
-#				@$(SUB_GIT)
+del:
+				$(RM_SUB_GIT)
+				@echo "remain sub git (empty = good)"
+				@$(SUB_GIT)
 
 gac:
 				git add .
