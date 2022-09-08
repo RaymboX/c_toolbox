@@ -15,7 +15,7 @@ int *ft_range(int start, int end)
 	int len;
 
 	len = ft_abs(start - end) + 1;
-	range = (int *)malloc(1);
+	range = malloc(0);
 	i = 0;
 	while (i < len)
 	{
@@ -30,27 +30,13 @@ int *ft_range(int start, int end)
 
 int main(void)
 {
-	int i = -1;
-	int start = 3;
-	int end = 10;
-	//int *range;
-	int *avant;
-	int *apres;
-	int garbage = 0;
-	
-	avant = malloc(sizeof(int));
-	*avant = -69;
-	avant[5] = 9999;
-	//range = ft_range(start, end);
-	apres = (int *)malloc(1);
-	*apres = -96;
-	//range[4] = 8457;
-	while (++i <= ft_abs(start - end) + 10) 
-	{
-		garbage += avant[i];
-		printf("%d - %d - %d\n", avant[i], i, garbage);
-		//printf("%p\n", &range[i]);
-	}
-	//free(range);
+	int	*ptr;
+	int	i;
+
+	ptr = ft_range(-2, 5);
+	i = -1;
+	while (++i != 8)
+		printf("%d\n", ptr[i]);
+	free (ptr);
 	return (0);
 }
