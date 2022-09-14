@@ -6,7 +6,7 @@
 /*   By: mraymond <mraymond@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:19:00 by mraymond          #+#    #+#             */
-/*   Updated: 2022/09/11 12:54:49 by mraymond         ###   ########.fr       */
+/*   Updated: 2022/09/14 10:33:21 by mraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(void)
 		add_history(rd_ret);
 		printf("%s\n", rd_ret);
 		free(rd_ret);
+		printf("%d\n", rl_on_new_line());
 	}
-	rl_clear_history();
+	clear_history();
 	return (0);
 }
