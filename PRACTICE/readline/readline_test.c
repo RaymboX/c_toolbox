@@ -6,12 +6,13 @@
 /*   By: mraymond <mraymond@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:19:00 by mraymond          #+#    #+#             */
-/*   Updated: 2022/09/14 10:33:21 by mraymond         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:59:38 by mraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <readline/readline.h>
+#include <readline/readline.h> //readline 
+
 #include <readline/history.h>
 #include <stdlib.h>
 

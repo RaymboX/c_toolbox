@@ -21,7 +21,7 @@ int main(void)
 	other_fct();
 	printf("Errno:%d\n", errno);
 	fd = open("file", O_RDWR);
-	//errno = 0;
+	errno = 0;
 	printf("Errno:%d\n", errno);
 	printf("fd:%d\n", fd);
 	return (0);
