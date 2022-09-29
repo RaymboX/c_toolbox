@@ -9,6 +9,7 @@ CACHE_DIR	=	/Users/mraymond/Library/Caches
 TRASH_FILES	=	/Users/mraymond/.Trash/*
 TRASH_DIR	=	/Users/mraymond/.Trash
 
+
 #SYSTEM VAR---------------------------------------------------------------------
 
 T = $(shell tput -Txterm setaf 1)
@@ -21,6 +22,7 @@ Z = $(shell tput -Txterm setaf 5)
 #project repositories
 
 R = c_toolbox
+FCT = write
 
 all: command
 
@@ -78,3 +80,13 @@ mem_free:
 				@echo "**if no file print after this, trash is empty**"
 				@ls -a $(TRASH_DIR)
 				@echo "----------------------------------------$W"
+
+ffc:			
+				@make -i --no-print-directory ffc_space
+				@make -i --no-print-directory ffc_star 
+
+ffc_space:
+				@find /usr/include/*.h -type f -print | xargs grep ' '$(FCT)' (' || true
+
+ffc_star:
+				@find /usr/include/*.h -type f -print | xargs grep '*'$(FCT)' (' || true

@@ -15,7 +15,7 @@ void	waiting_all_child(int nb_child, int *status)
 	i = -1;
 	while (++i < nb_child)
 	{
-		child_id = waitpid(0, status, 0);
+		child_id = waitpid(-1, status, 0);
 		if (child_id != -1)
 			printf("child id waitpid return:%d\n", child_id);
 		else
@@ -51,7 +51,7 @@ int	main(void)
 	
 
 	id = -1;
-	nb_child = 10;
+	nb_child = 5;
 	i = -1;
 	while (++i < nb_child && id != 0)
 	{
