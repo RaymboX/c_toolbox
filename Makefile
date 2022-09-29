@@ -82,11 +82,24 @@ mem_free:
 				@echo "----------------------------------------$W"
 
 ffc:			
-				@make -i --no-print-directory ffc_space
-				@make -i --no-print-directory ffc_star 
+				@make -i --no-print-directory ffc_strict
+				@make -i --no-print-directory ffc_ptr 
+#@make -i --no-print-directory ffc_large 
 
-ffc_space:
-				@find /usr/include/*.h -type f -print | xargs grep ' '$(FCT)' (' || true
+ffc_strict:
+				@echo "----------strict search----------"
+#				@find /usr/include -type f -name "*.h" -print | xargs grep ' '$(FCT)' (' || true
+#				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"" $(FCT) "'(' || true
+				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .* $(FCT) "'('|| true
 
-ffc_star:
-				@find /usr/include/*.h -type f -print | xargs grep '*'$(FCT)' (' || true
+
+ffc_ptr:
+				@echo "----------ptr search----------"
+#				@find /usr/include -type f -name "*.h" -print | xargs grep '*'$(FCT)' (' || true
+#				@find /usr/include -type f -name "*.h" -print | xargs grep '*'$(FCT)' (' || true
+#				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"'*'$(FCT)' (' || true
+				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"'*'"$(FCT) "'(' || true
+
+#ffc_large:
+				@echo "----------large search----------"
+				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"'*'"$(FCT) " || true
