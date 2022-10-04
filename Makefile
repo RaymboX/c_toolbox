@@ -8,7 +8,11 @@ CACHE_FILES	=	/Users/mraymond/Library/Caches/*
 CACHE_DIR	=	/Users/mraymond/Library/Caches
 TRASH_FILES	=	/Users/mraymond/.Trash/*
 TRASH_DIR	=	/Users/mraymond/.Trash
-
+LINUX_H_PATH =  /usr/include
+DARWIN_H_PATH =	/System/Volumes/Data/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+UNAME_S     =	$(shell uname -s)
+H_PATH		=	$(DARWIN_H_PATH)
+    
 
 #SYSTEM VAR---------------------------------------------------------------------
 
@@ -82,15 +86,20 @@ mem_free:
 				@echo "----------------------------------------$W"
 
 ffc:			
+ifeq ($(UNAME_S),Linux)
+				H_PATH = $(LINUX_H_PATH)
+endif				
 				@make -i --no-print-directory ffc_strict
 				@make -i --no-print-directory ffc_ptr 
-#@make -i --no-print-directory ffc_large 
+				@make -i --no-print-directory ffc_large
+
 
 ffc_strict:
 				@echo "----------strict search----------"
 #				@find /usr/include -type f -name "*.h" -print | xargs grep ' '$(FCT)' (' || true
 #				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"" $(FCT) "'(' || true
-				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .* $(FCT) "'('|| true
+#				@find $(H_PATH) -type f -name "*.h" -print | xargs grep "^extern .* $(FCT) "'('|| true
+				@find $(H_PATH) -type f -name "*.h" -print | grep "^extern .* $(FCT) "'('|| true
 
 
 ffc_ptr:
@@ -98,8 +107,11 @@ ffc_ptr:
 #				@find /usr/include -type f -name "*.h" -print | xargs grep '*'$(FCT)' (' || true
 #				@find /usr/include -type f -name "*.h" -print | xargs grep '*'$(FCT)' (' || true
 #				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"'*'$(FCT)' (' || true
-				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"'*'"$(FCT) "'(' || true
+				@find $(H_PATH) -type f -name "*.h" -print | xargs grep $(FCT)
 
-#ffc_large:
+ffc_large:
 				@echo "----------large search----------"
-				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"'*'"$(FCT) " || true
+				@find $(H_PATH) -type f -name "*.h" -print | xargs grep "^extern .*"'*'"$(FCT) " || true
+
+os:
+				@echo $(UNAME_S)
