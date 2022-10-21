@@ -8,9 +8,7 @@ int	id;
 
 void	signal_handler(int signal)
 {
-	(void)signal;
-
-	printf("%d\n", id);
+	printf("id:%d signal:%d\n", id, signal);
 	exit(0);
 }
 
