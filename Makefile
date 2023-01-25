@@ -31,11 +31,57 @@ Z = $(shell tput -Txterm setaf 5)
 R = c_toolbox
 FCT = write
 
+define REPO
+commande gh repo list sur TourDebian
+
+RaymboX/piscine_cpp                                                           private  17h
+RaymboX/cub3d                                                                 public   Dec 13, 2022
+RaymboX/opengl_raycast      from tuto on youtube                              private  Nov 16, 2022
+RaymboX/minishell                                                             private  Nov  9, 2022
+RaymboX/miniprojects        petits projets perso                              public   Nov  7, 2022
+RaymboX/correction          projet corriger                                   private  Oct 26, 2022
+RaymboX/c_toolbox           test etc                                          private  Oct 21, 2022
+RaymboX/cpp                 Piscine cpp                                       private  Oct  4, 2022
+RaymboX/philo                                                                 private  Sep  7, 2022
+RaymboX/libft               c library for 42 projects                         private  Sep  7, 2022
+RaymboX/so_long_tester      Tests de parcing de map pour so_long (projet 42)  public   Aug 11, 2022
+RaymboX/pipex               42 project                                        private  Aug  9, 2022
+RaymboX/piscine             project piscine 42                                private  Aug  3, 2022
+RaymboX/push_swap           42 project                                        private  Aug  3, 2022
+RaymboX/fdf                 42 project                                        private  Aug  3, 2022
+RaymboX/get_next_line       42 project                                        private  Aug  3, 2022
+RaymboX/printf              42 project                                        private  Aug  3, 2022
+RaymboX/RaymGIT             All files                                         private  Aug  3, 2022
+RaymboX/RaymboX_C_projects  Public repository to share                        public   Mar 21, 2022
+RaymboX/RaymboX-VBA         Quelques projets en Excel VBA                     public   Feb 21, 2022
+endef
+export REPO
+
+define ALIAS_LIST
+alias cdd="cd ~/Documents" #RaymboX_alias_List----------
+alias cd...="cd ../.." #RaymboX_alias_List----------
+alias cd....="cd ../../.." #RaymboX_alias_List----------
+endef
+export ALIAS_LIST
+
 all: command
 
 command:
 		echo "clone R=<repositories name> : clone repositories from github"
 
+alias:
+		echo "$$ALIAS_LIST" > alias_list
+		@echo "$GFaite la commande: source ./alias_list pour appliquer$W"
+#		cp ~/.bashrc cpy.bashrc
+#		sed '/RaymboX_alias_List/d' cpy.bashrc > temp
+#		mv temp cpy.bashrc
+#		echo "$$ALIAS_LIST" >> cpy.bashrc
+		
+alais:
+		make alias
+
+repo:
+		@echo "$$REPO"
 
 clone:
 		echo $(R)
@@ -91,10 +137,7 @@ mem_free:
 				@echo "      NOW WE ARE AT: $(USER_SIZE)\n"
 				@$(shell $(RM) $(ERROR_FILE))
 
-ffc:			
-ifeq ($(UNAME_S),Linux)
-				H_PATH = $(LINUX_H_PATH)
-endif				
+ffc:					
 				@make -i --no-print-directory ffc_strict
 				@make -i --no-print-directory ffc_ptr 
 				@make -i --no-print-directory ffc_large
@@ -105,19 +148,20 @@ ffc_strict:
 #				@find /usr/include -type f -name "*.h" -print | xargs grep ' '$(FCT)' (' || true
 #				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"" $(FCT) "'(' || true
 #				@find $(H_PATH) -type f -name "*.h" -print | xargs grep "^extern .* $(FCT) "'('|| true
-				@find $(H_PATH) -type f -name "*.h" -print | grep "^extern .* $(FCT) "'('|| true
-
+ifeq ($(UNAME_S),Linux)
+				@find $(LINUX_H_PATH) -type f -name "*.h" -print | grep "^extern .* $(FCT) "'('|| true
+endif
 
 ffc_ptr:
 				@echo "----------ptr search----------"
 #				@find /usr/include -type f -name "*.h" -print | xargs grep '*'$(FCT)' (' || true
 #				@find /usr/include -type f -name "*.h" -print | xargs grep '*'$(FCT)' (' || true
 #				@find /usr/include -type f -name "*.h" -print | xargs grep "^extern .*"'*'$(FCT)' (' || true
-				@find $(H_PATH) -type f -name "*.h" -print | xargs grep $(FCT)
+				@find $(LINUX_H_PATH) -type f -name "*.h" -print | xargs grep $(FCT)
 
 ffc_large:
 				@echo "----------large search----------"
-				@find $(H_PATH) -type f -name "*.h" -print | xargs grep "^extern .*"'*'"$(FCT) " || true
+				@find $(LINUX_H_PATH) -type f -name "*.h" -print | xargs grep "^extern .*"'*'"$(FCT) " || true
 
 os:
 				@echo $(UNAME_S)
